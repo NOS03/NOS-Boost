@@ -1,26 +1,12 @@
-# 🚀 NOS Boost
+# NOS Boost
 
-**NOS Boost** هو تطبيق مخصص لأجهزة الأندرويد، تم تصميمه لتحسين تجربة الألعاب من خلال تحسين أداء الجهاز وتقليل استهلاك الموارد. تم تطويره باستخدام إطار العمل القوي **.NET MAUI**.
+An Android application for performance optimization and network management.
 
----
-
-## 🛠 المميزات الحالية (Features)
-- **تحسين الأداء:** يعمل التطبيق على تجميد العمليات الخلفية غير الضرورية (App Freezing) لتوفير الذاكرة للمعالج أثناء اللعب.
-- **نظام الدخل:** مدمج فيه نظام عرض إعلانات مدعوم من المستخدم لضمان استمرارية التطوير.
-- **واجهة عصرية:** تصميم بسيط يركز على سهولة الاستخدام.
-
----
-
-## 📅 خارطة الطريق (Roadmap)
-نحن نعمل باستمرار على تحسين التطبيق. هذه هي الميزات القادمة:
-- [ ] إضافة وضع "Game Turbo" لتحسين استجابة اللمس.
-- [ ] تحسين تقنية الاتصال بالشبكة لتقليل الـ Ping.
-- [ ] دعم المزيد من إصدارات أندرويد القديمة.
+## Features:
+- **Cache Cleaning:** Clears temporary files to improve system speed.
+- **Network Control:** Directs internet traffic to specific apps and blocks others.
+- **Hardware Monitor:** Real-time monitoring of RAM and internal storage (ROM) usage.
+- **Ping Monitor:** Tracks network latency in real-time.
 
 ---
-
-## 📝 الترخيص
-هذا المشروع مرخص تحت رخصة **MIT License**، مما يعني أنه يمكنك استخدامه وتطويره بحرية.
-
----
-*تم التطوير بواسطة: حاتم علي مناحي*
+Developed by Hatim Ali Manahi
