@@ -1,0 +1,32 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x' # قم بتغييرها إلى 9.0 أو 10.0 إذا كان مشروعك يستخدم إصداراً أحدث
+
+    - name: Install MAUI Workload
+      run: dotnet workload install maui-android
+
+    - name: Build and Publish
+      run: dotnet publish VPN_Gaming/VPN_Gaming.csproj -c Release -f net8.0-android -p:AndroidKeyStore=true -p:AndroidSigningKeyStore="..\release.keystore" -p:AndroidSigningKeyAlias=mykey -p:AndroidSigningStorePass="${{ secrets.KEY_PASSWORD }}" -p:AndroidSigningKeyPass="${{ secrets.KEY_PASSWORD }}"
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: VPN-Gaming-Release
+        path: VPN_Gaming\bin\Release\net8.0-android\**\*-Signed.apk
+        
