@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+	<!-- الخلفية الداكنة -->
+	<rect width="1024" height="1024" fill="#0D0D14" />
+
+	<!-- حلقة عداد السرعة (مصغرة لتناسب الشاشة) -->
+	<circle cx="512" cy="512" r="280" fill="none" stroke="#2A2A35" stroke-width="25" />
+
+	<!-- مؤشر النيون الأخضر (مصغر) -->
+	<path d="M 512 232 A 280 280 0 0 1 792 512" fill="none" stroke="#00FF66" stroke-width="25" stroke-linecap="round" />
+
+	<!-- كلمة NOS -->
+	<text x="512" y="490" font-family="Arial, sans-serif" font-size="180" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="10">NOS</text>
+
+	<!-- كلمة BOOST -->
+	<text x="512" y="600" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="#00FF66" text-anchor="middle" letter-spacing="15">BOOST</text>
+</svg>

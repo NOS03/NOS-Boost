@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VPN_Gaming.MainPage"
+             BackgroundColor="#F3F4F6">
+
+    <Grid>
+        <!-- المحتوى الرئيسي داخل ScrollView للتجاوب مع كل الشاشات -->
+        <ScrollView>
+            <Grid RowDefinitions="Auto, *, Auto, Auto" Padding="20" RowSpacing="20">
+
+                <!-- زر الدعم (MD3 Tonal Button) -->
+                <Button Grid.Row="0" Text="❤️" FontSize="18" 
+                        BackgroundColor="#E8DEF8" TextColor="#1D192B" 
+                        CornerRadius="16" WidthRequest="70" HeightRequest="40" 
+                        Padding="0" HorizontalOptions="Center" Margin="0,10,0,0" 
+                        Clicked="OnHeartClicked"/>
+
+                <!-- المركز: دوائر الرام والروم داخل كروت MD3 -->
+                <VerticalStackLayout Grid.Row="1" VerticalOptions="Center" Spacing="24" HorizontalOptions="Center">
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="20">
+                        <!-- دائرة RAM -->
+                        <Border Grid.Column="0" Stroke="Transparent" BackgroundColor="White" Padding="15" WidthRequest="160">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="24"/>
+                            </Border.StrokeShape>
+                            <Border.Shadow>
+                                <Shadow Brush="Black" Offset="0,2" Radius="6" Opacity="0.05"/>
+                            </Border.Shadow>
+                            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                                <Label Text="الذاكرة العشوائية" FontSize="14" TextColor="#49454F" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                <Grid WidthRequest="120" HeightRequest="120" HorizontalOptions="Center">
+                                    <GraphicsView x:Name="RamGraphicsView" WidthRequest="120" HeightRequest="120" />
+                                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Label x:Name="RamStatLabel" Text="0" FontSize="32" TextColor="#1D1B20" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                        <Label Text="%" FontSize="12" TextColor="#49454F" HorizontalOptions="Center" Margin="0,-5,0,0"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <!-- دائرة ROM -->
+                        <Border Grid.Column="1" Stroke="Transparent" BackgroundColor="White" Padding="15" WidthRequest="160">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="24"/>
+                            </Border.StrokeShape>
+                            <Border.Shadow>
+                                <Shadow Brush="Black" Offset="0,2" Radius="6" Opacity="0.05"/>
+                            </Border.Shadow>
+                            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                                <Label Text="مساحة التخزين" FontSize="14" TextColor="#49454F" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                <Grid WidthRequest="120" HeightRequest="120" HorizontalOptions="Center">
+                                    <GraphicsView x:Name="RomGraphicsView" WidthRequest="120" HeightRequest="120" />
+                                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Label x:Name="RomStatLabel" Text="0" FontSize="32" TextColor="#1D1B20" HorizontalOptions="Center" FontAttributes="Bold"/>
+                                        <Label Text="%" FontSize="12" TextColor="#49454F" HorizontalOptions="Center" Margin="0,-5,0,0"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+
+                    <!-- مفاتيح الألوان -->
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="25">
+                        <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                            <Ellipse Fill="#5DBB63" WidthRequest="12" HeightRequest="12" VerticalOptions="Center"/>
+                            <Label Text="المتبقي" FontSize="14" TextColor="#49454F" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                            <Ellipse Fill="#EA4335" WidthRequest="12" HeightRequest="12" VerticalOptions="Center"/>
+                            <Label Text="المستهلك" FontSize="14" TextColor="#49454F" VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- الأزرار الرئيسية (MD3 Filled Buttons) -->
+                <VerticalStackLayout Grid.Row="2" Spacing="16" HorizontalOptions="Center" Margin="0,10,0,20">
+                    <Button x:Name="FreezeAppsButton" Text="تنظيف وتسريع 🚀" FontSize="16" FontAttributes="Bold" 
+                            BackgroundColor="#0B57D0" TextColor="White" HeightRequest="56" WidthRequest="280" 
+                            CornerRadius="28" Clicked="OnFreezeAppsClicked" />
+                    <Button x:Name="ToggleVpnMainButton" Text="توجيه الإنترنت" FontSize="16" FontAttributes="Bold" 
+                            BackgroundColor="#0B57D0" TextColor="White" HeightRequest="56" WidthRequest="280" 
+                            CornerRadius="28" Clicked="OnToggleVpnClicked" />
+                </VerticalStackLayout>
+
+                <!-- الأزرار السفلية (MD3 Elevated Cards) -->
+                <Grid Grid.Row="3" ColumnDefinitions="*, *, *" ColumnSpacing="12" Margin="0,0,0,10">
+                    <Border Grid.Column="0" Stroke="Transparent" BackgroundColor="White" Padding="5,15">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16"/>
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="0,1" Radius="3" Opacity="0.05"/>
+                        </Border.Shadow>
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
+                            <Label Text="🌐" FontSize="24" HorizontalOptions="Center"/>
+                            <Label HorizontalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span x:Name="PingTextSpan" Text="Ping: " FontAttributes="Bold" TextColor="#49454F" FontSize="12"/>
+                                        <Span x:Name="PingValueSpan" Text="-- ms" FontAttributes="Bold" TextColor="#49454F" FontSize="12"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1" Stroke="Transparent" BackgroundColor="White" Padding="5,15">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16"/>
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="0,1" Radius="3" Opacity="0.05"/>
+                        </Border.Shadow>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnManageVpnAppsClicked"/>
+                        </Border.GestureRecognizers>
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
+                            <Label Text="📱" FontSize="24" HorizontalOptions="Center"/>
+                            <Label Text="إضافة التطبيقات" FontSize="12" FontAttributes="Bold" TextColor="#49454F" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="2" Stroke="Transparent" BackgroundColor="White" Padding="5,15">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="16"/>
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="0,1" Radius="3" Opacity="0.05"/>
+                        </Border.Shadow>
+                        <VerticalStackLayout HorizontalOptions="Center" Spacing="8">
+                            <Label Text="🛡️" FontSize="24" HorizontalOptions="Center"/>
+                            <Label x:Name="FirewallStatusLabel" Text="متوقف" FontSize="12" FontAttributes="Bold" TextColor="#B3261E" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+            </Grid>
+        </ScrollView>
+
+        <!-- نافذة الصلاحيات (MD3 Dialog) -->
+        <Grid x:Name="PermissionOverlay" BackgroundColor="#80000000" IsVisible="False">
+            <Border BackgroundColor="#FDFCFB" WidthRequest="320" VerticalOptions="Center" HorizontalOptions="Center" Padding="24" Stroke="Transparent">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="28"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="🛡️" FontSize="36" HorizontalOptions="Center" />
+                    <Label Text="إعداد التنظيف الذكي" FontSize="22" TextColor="#1D1B20" HorizontalOptions="Center" />
+                    <Label Text="لمسح الكاش تلقائياً وتحرير الرام حقيقياً، يجب تفعيل تطبيقنا في إعدادات 'إمكانية الوصول'. بياناتك آمنة ومحمية." 
+                           FontSize="14" TextColor="#49454F" HorizontalTextAlignment="Center" LineHeight="1.5" />
+                    <Button Text="منح الصلاحية الآن" BackgroundColor="#0B57D0" TextColor="White" CornerRadius="20" HeightRequest="40" Clicked="OnGrantAccessibilityClicked" Margin="0,8,0,0"/>
+                    <Button Text="إغلاق" BackgroundColor="Transparent" TextColor="#0B57D0" CornerRadius="20" HeightRequest="40" Clicked="OnClosePermissionClicked"/>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- نافذة الإعلانات (MD3 Dialog) -->
+        <Grid x:Name="AdOverlay" BackgroundColor="#80000000" IsVisible="False">
+            <Border BackgroundColor="#FDFCFB" WidthRequest="320" VerticalOptions="Center" HorizontalOptions="Center" Padding="24" Stroke="Transparent">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="28"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="❤️" FontSize="36" HorizontalOptions="Center" />
+                    <Label Text="دعم التطبيق" FontSize="22" TextColor="#1D1B20" HorizontalOptions="Center" />
+                    <Label Text="هل تود دعم التطبيق بمشاهدة إعلان 30 ثانية؟ هذا سيساعد المطور في تقديم المزيد من الميزات وتوفيرها بشكل مجاني." 
+                           FontSize="14" TextColor="#49454F" HorizontalTextAlignment="Center" LineHeight="1.5" />
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="12" Margin="0,8,0,0">
+                        <Button Grid.Column="0" Text="إغلاق" BackgroundColor="Transparent" TextColor="#0B57D0" CornerRadius="20" HeightRequest="40" Clicked="OnCloseAdClicked"/>
+                        <Button Grid.Column="1" Text="نعم" BackgroundColor="#0B57D0" TextColor="White" CornerRadius="20" HeightRequest="40" Clicked="OnWatchAdClicked"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+        <!-- نافذة التنبيهات العامة (MD3 Dialog) -->
+        <Grid x:Name="GeneralAlertOverlay" BackgroundColor="#80000000" IsVisible="False">
+            <Border BackgroundColor="#FDFCFB" WidthRequest="320" VerticalOptions="Center" HorizontalOptions="Center" Padding="24" Stroke="Transparent">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="28"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="16">
+                    <Label x:Name="AlertTitleLabel" Text="تنبيه" FontSize="22" TextColor="#1D1B20" HorizontalOptions="Start" />
+                    <Label x:Name="AlertMessageLabel" Text="..." FontSize="14" TextColor="#49454F" HorizontalTextAlignment="Start" LineHeight="1.5" />
+                    <Button Text="حسناً" BackgroundColor="Transparent" TextColor="#0B57D0" CornerRadius="20" HeightRequest="40" HorizontalOptions="End" Clicked="OnCloseAlertClicked" Margin="0,8,0,0"/>
+                </VerticalStackLayout>
+            </Border>
+        </Grid>
+
+    </Grid>
+</ContentPage>

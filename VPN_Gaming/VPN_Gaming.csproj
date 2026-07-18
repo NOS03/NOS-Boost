@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<!-- تم الإبقاء على الأندرويد فقط -->
+		<TargetFrameworks>net10.0-android</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>VPN_Gaming</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<!-- Enable XAML source generation for faster build times -->
+		<MauiXamlInflator>SourceGen</MauiXamlInflator>
+		<!-- اسم التطبيق الجديد -->
+		<ApplicationTitle>NOS Boost</ApplicationTitle>
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.vpn_gaming</ApplicationId>
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+		<!-- إصدار الأندرويد المطلوب (أندرويد 8 فما فوق لتجنب الأخطاء) -->
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
+		<!-- تشفير أكواد الجافا والأندرويد (ProGuard/R8) -->
+		<AndroidLinkTool>r8</AndroidLinkTool>
+		<!-- تحويل الكود إلى Native لمنع الهندسة العكسية تماماً -->
+		<RunAOTCompilation>false</RunAOTCompilation>
+		<!-- حذف الأكواد غير المستخدمة لتقليل الحجم -->
+		<PublishTrimmed>true</PublishTrimmed>
+		<AndroidKeyStore>False</AndroidKeyStore>
+		<AndroidPackageFormat>apk</AndroidPackageFormat>
+		<AndroidSigningKeyAlias>NOS</AndroidSigningKeyAlias>
+		<AndroidSigningKeyPass>184515481</AndroidSigningKeyPass>
+		<AndroidSigningStorePass>184515481</AndroidSigningStorePass>
+		<DebugSymbols>False</DebugSymbols>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net10.0-android|AnyCPU'">
+		<AndroidKeyStore>False</AndroidKeyStore>
+		<AndroidSigningKeyAlias>NOS</AndroidSigningKeyAlias>
+		<AndroidSigningKeyPass>184515481</AndroidSigningKeyPass>
+		<AndroidSigningStorePass>184515481</AndroidSigningStorePass>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- أيقونة التطبيق بخلفية داكنة فخمة -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#0D0D14" />
+		<!-- شاشة البداية (Splash Screen) داكنة بدون أي ألوان مزعجة -->
+		<MauiSplashScreen Include="Resources\AppIcon\appiconfg.svg" Color="#0D0D14" BaseSize="128,128" />
+		<!-- الصور (تم حذف الروبوت الافتراضي بالكامل) -->
+		<MauiImage Include="Resources\Images\*" />
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+		<!-- Raw Assets -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+		<PackageReference Include="Plugin.MauiMTAdmob" Version="2.4.0" />
+		<PackageReference Include="Xamarin.Android.UnityAdsSdk" Version="3.7.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiXaml Update="AppListPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+	</ItemGroup>
+</Project>
