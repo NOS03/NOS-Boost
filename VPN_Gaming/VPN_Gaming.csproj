@@ -19,6 +19,8 @@
 		<ApplicationVersion>1</ApplicationVersion>
 		<!-- إصدار الأندرويد المطلوب (أندرويد 8 فما فوق لتجنب الأخطاء) -->
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
+		<!-- تم إضافة السطر التالي لحل تعارض الإصدارات -->
+		<TargetPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">34.0</TargetPlatformVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net10.0-android|AnyCPU'">
